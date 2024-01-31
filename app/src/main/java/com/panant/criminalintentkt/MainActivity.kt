@@ -1,7 +1,6 @@
 package com.panant.criminalintentkt
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import java.util.UUID
 
@@ -9,7 +8,6 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity(), CrimeListFragment.Callbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
