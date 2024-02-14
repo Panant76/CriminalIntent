@@ -4,6 +4,9 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -26,7 +29,7 @@ class CrimeListFragment : Fragment() {
 
     private var callbacks: Callbacks? = null
     private lateinit var crimeRecyclerView: RecyclerView
-    //private var adapter: CrimeAdapter? = CrimeAdapter(emptyList())
+
 
     private val crimeListViewModel: CrimeListViewModel by lazy {
         ViewModelProvider(this)[CrimeListViewModel::class.java]
@@ -35,6 +38,11 @@ class CrimeListFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callbacks = context as Callbacks?
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -68,9 +76,26 @@ class CrimeListFragment : Fragment() {
         callbacks = null
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.fragment_crime_list, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.new_crime -> {
+                val crime = Crime()
+                crimeListViewModel.addCrime(crime)
+                callbacks?.onCrimeSelected(crime.id)
+                true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun updateUI(crimes: List<Crime>) {
 
-        //adapter = CrimeAdapter(crimes)
         (crimeRecyclerView.adapter as CrimeAdapter).submitList(crimes)
     }
 
@@ -104,7 +129,8 @@ class CrimeListFragment : Fragment() {
         }
     }
 
-    private inner class CrimeAdapter : ListAdapter<Crime, CrimeHolder>(DiffCallback()) {
+    private inner class CrimeAdapter :
+        ListAdapter<Crime, CrimeHolder>(DiffCallback()) {
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
@@ -112,10 +138,9 @@ class CrimeListFragment : Fragment() {
             return CrimeHolder(view)
         }
 
-        // override fun getItemCount() = getItem(po).size
 
         override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-            // val crime = crimes[position]
+
             holder.bind(getItem(position))
         }
     }

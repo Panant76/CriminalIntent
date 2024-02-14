@@ -19,6 +19,7 @@ import java.util.UUID
 private const val TAG = "CrimeFragment"
 private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
+private const val DIALOG_TIME = "Dialogtime"
 private const val REQUEST_DATE = 0
 
 class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
@@ -26,6 +27,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var titleField: EditText
     private lateinit var dateButton: Button
     private lateinit var solvedCheckBox: CheckBox
+    private lateinit var timeButton: Button
 
     private val crimeDetailViewModel: CrimeDetailViewModel by lazy {
         ViewModelProvider(this)[CrimeDetailViewModel::class.java]
@@ -49,6 +51,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
         titleField = view.findViewById(R.id.crime_title) as EditText
         dateButton = view.findViewById(R.id.crime_data) as Button
         solvedCheckBox = view.findViewById(R.id.crime_solved) as CheckBox
+        timeButton = view.findViewById(R.id.crime_time) as Button
 
         return view
     }
@@ -91,6 +94,11 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
             DatePickerFragment.newInstance(crime.date).apply {
                 setTargetFragment(this@CrimeFragment, REQUEST_DATE)
                 show(this@CrimeFragment.parentFragmentManager, DIALOG_DATE)
+            }
+        }
+        timeButton.setOnClickListener {
+            TimePickerFragment.newInstance(crime.date).apply {
+                show(this@CrimeFragment.parentFragmentManager, DIALOG_TIME)
             }
         }
     }
