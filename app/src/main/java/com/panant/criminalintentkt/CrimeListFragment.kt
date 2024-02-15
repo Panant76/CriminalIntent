@@ -60,7 +60,6 @@ class CrimeListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val menuHost: MenuHost = requireActivity()
-        //setHasOptionsMenu(true)
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.fragment_crime_list, menu)
@@ -76,7 +75,6 @@ class CrimeListFragment : Fragment() {
                     }
 
                     else -> false
-
                 }
             }
         })
