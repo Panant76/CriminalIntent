@@ -22,7 +22,7 @@ private const val TAG = "CrimeFragment"
 private const val ARG_CRIME_ID = "crime_id"
 private const val DIALOG_DATE = "DialogDate"
 private const val REQUEST_DATE = 0
-private const val DATE_FORMAT = "EEE, MMM, dd"
+private const val DATE_FORMAT = "EEEE, dd MMMM yyyy  hh:mm:ss"
 
 class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
     private lateinit var crime: Crime
@@ -114,7 +114,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
 
     private fun updateUI() {
         titleField.setText(crime.title)
-        dateButton.text = crime.date.toString()
+        dateButton.text = DateFormat.format(DATE_FORMAT,crime.date).toString()
         solvedCheckBox.apply {
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
