@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.panant.criminalintentkt.Crime
 import com.panant.criminalintentkt.database.CrimeDatabase
-//import com.panant.criminalintentkt.database.migration_1_2
+import com.panant.criminalintentkt.database.migration_1_2
 import java.util.UUID
 import java.util.concurrent.Executors
 
@@ -16,8 +16,8 @@ class CrimeRepository private constructor(context: Context) {
     private val database: CrimeDatabase = Room.databaseBuilder(
         context.applicationContext,
         CrimeDatabase::class.java,
-        DATABASE_NAME)
-//    ).addMigrations(migration_1_2)
+        DATABASE_NAME
+    ).addMigrations(migration_1_2)
         .build()
 
     private val crimeDao = database.crimeDao()
