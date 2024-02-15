@@ -32,7 +32,7 @@
         android:id="@+id/crime_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/crime_date" />
+        tools:text="@string/crime_date" />
 
     <CheckBox
         android:id="@+id/crime_solved"
