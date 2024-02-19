@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.panant.criminalintentkt.repository.CrimeRepository
+import java.io.File
 import java.util.UUID
 
 class CrimeDetailViewModel : ViewModel() {
@@ -21,5 +22,9 @@ class CrimeDetailViewModel : ViewModel() {
 
     fun saveCrime(crime: Crime) {
         crimeRepository.updateCrime(crime)
+    }
+
+    fun getPhotoFile(crime: Crime): File {
+        return crimeRepository.getPhotoFile(crime)
     }
 }

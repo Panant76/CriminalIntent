@@ -8,9 +8,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CriminalIntentKt"
-        >
-        <activity android:name=".MainActivity"
+        android:theme="@style/Theme.CriminalIntentKt">
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
 
             <intent-filter>
@@ -20,7 +20,17 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.panant.criminalintentkt.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
 
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/files" />
+
+        </provider>
 
 
     </application>
